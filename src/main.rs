@@ -183,7 +183,7 @@ fn build_and_apply_patch(source: &str, dest: &str) -> Result<()> {
     info!("apply patch");
     let updated_contents = apply(&dest_contents, &patch)?;
 
-    // save modified dest to file
+    info!("save modified dest to file");
     write_all(&dest, &updated_contents)?;
 
     Ok(())
