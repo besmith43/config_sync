@@ -130,7 +130,7 @@ fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
 
 "#;
 
-        //write it to disc
+        info!("write it to disc");
         write_all(conf_path, &blank_config)?;
     }
 
