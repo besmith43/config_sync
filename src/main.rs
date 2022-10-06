@@ -47,6 +47,7 @@ fn main() -> Result<()> {
     info!("get the values of the toml config file");
     let toml_config = get_toml(toml_config_path)?;
 
+    info!("generating and applying the patches between the onedrive (master) config files and the local config files");
     for conf in toml_config {
         build_and_apply_patch(&conf.source, &conf.destination)?;
     }
