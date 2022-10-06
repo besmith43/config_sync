@@ -177,7 +177,7 @@ fn build_and_apply_patch(source: &str, dest: &str) -> Result<()> {
 
     let dest_contents = read_to_string(dest)?;
 
-    // build patch
+    info!("build patch");
     let patch = create_patch(&dest_contents, &source_contents);
 
     // apply patch
