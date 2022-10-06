@@ -52,6 +52,7 @@ fn main() -> Result<()> {
         build_and_apply_patch(&conf.source, &conf.destination)?;
     }
 
+    info!("application ran successfully");
     Ok(())
 }
 
