@@ -83,7 +83,7 @@ fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
 
         toml_conf = toml::from_str(&toml_contents_string)?;
     } else {
-        // if not, create a default file
+        info!("if not, create a default file");
         toml_conf = Config {
             win_terminal: None,
             nu_config: None,
