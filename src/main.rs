@@ -76,7 +76,7 @@ fn get_toml_path(user_path: Option<PathBuf>) -> Result<PathBuf> {
 fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
     let toml_conf: Config;
 
-    // see if toml file exists
+    info!("see if toml file exists");
     if Path::new(&conf_path).is_file() {
         // if so, get the contents
         let toml_contents_string = read_to_string(conf_path)?;
