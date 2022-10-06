@@ -172,7 +172,7 @@ fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
 }
 
 fn build_and_apply_patch(source: &str, dest: &str) -> Result<()> {
-    // read in contents of source and dest to string
+    info!("read in contents of source and dest to string");
     let source_contents = read_to_string(source)?;
 
     let dest_contents = read_to_string(dest)?;
