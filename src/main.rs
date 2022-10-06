@@ -1,13 +1,16 @@
-use diffy::{apply, merge, Patch, create_patch};
-use toml::*;
+use anyhow::Result;
 use chrono::prelude::*;
+use diffy::{apply, create_patch, merge, Patch};
+use fs_extra::file::{read_to_string, write_all};
 use serde_derive::{Deserialize, Serialize};
+use std::env::var_os;
 use std::ffi::OsString;
 use std::path::{Path, PathBuf};
-use std::env::var_os;
 use structopt::StructOpt;
-use fs_extra::file::{read_to_string, write_all};
-use anyhow::Result;
+use toml::*;
+
+#[macro_use]
+extern crate log;
 
 #[derive(Deserialize, Serialize)]
 struct Config {
@@ -33,9 +36,12 @@ struct Opt {
 }
 
 fn main() -> Result<()> {
+    env_logger::init();
 
+    info!("getting options from structopt");
     let opt = Opt::from_args();
 
+    info!("running get_toml_path to check the ");
     let toml_config_path = get_toml_path(opt.conf)?;
 
     let toml_config = get_toml(toml_config_path)?;
@@ -48,7 +54,6 @@ fn main() -> Result<()> {
 }
 
 fn get_toml_path(user_path: Option<PathBuf>) -> Result<PathBuf> {
-
     let os_conf_path = if cfg!(windows) {
         var_os("HOMEPATH")
     } else {
@@ -66,7 +71,6 @@ fn get_toml_path(user_path: Option<PathBuf>) -> Result<PathBuf> {
 }
 
 fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
-
     let toml_conf: Config;
 
     // see if toml file exists
@@ -132,32 +136,32 @@ fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
 
     match toml_conf.win_terminal {
         Some(x) => vec_conf.push(x),
-        None => {},
+        None => {}
     };
 
     match toml_conf.nu_config {
         Some(x) => vec_conf.push(x),
-        None => {},
+        None => {}
     };
 
     match toml_conf.nu_env {
         Some(x) => vec_conf.push(x),
-        None => {},
+        None => {}
     };
 
     match toml_conf.helix_config {
         Some(x) => vec_conf.push(x),
-        None => {},
+        None => {}
     };
 
     match toml_conf.helix_languages {
         Some(x) => vec_conf.push(x),
-        None => {},
+        None => {}
     };
 
     match toml_conf.ssh_config {
         Some(x) => vec_conf.push(x),
-        None => {},
+        None => {}
     };
 
     // return the toml values
@@ -165,7 +169,6 @@ fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
 }
 
 fn build_and_apply_patch(source: &str, dest: &str) -> Result<()> {
-
     // read in contents of source and dest to string
     let source_contents = read_to_string(source)?;
 
