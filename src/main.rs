@@ -44,7 +44,7 @@ fn main() -> Result<()> {
     info!("running get_toml_path to check the path to the toml config file on the local system");
     let toml_config_path = get_toml_path(opt.conf)?;
 
-    info!("");
+    info!("get the values of the toml config file");
     let toml_config = get_toml(toml_config_path)?;
 
     for conf in toml_config {
