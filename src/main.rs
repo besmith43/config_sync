@@ -180,7 +180,7 @@ fn build_and_apply_patch(source: &str, dest: &str) -> Result<()> {
     info!("build patch");
     let patch = create_patch(&dest_contents, &source_contents);
 
-    // apply patch
+    info!("apply patch");
     let updated_contents = apply(&dest_contents, &patch)?;
 
     // save modified dest to file
