@@ -134,7 +134,7 @@ fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
         write_all(conf_path, &blank_config)?;
     }
 
-    // convert Config to Vec<ConfigPair>
+    info!("convert Config to Vec<ConfigPair>");
     let mut vec_conf: Vec<ConfigPair> = Vec::new();
 
     match toml_conf.win_terminal {
