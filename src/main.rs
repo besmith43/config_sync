@@ -167,7 +167,7 @@ fn get_toml(conf_path: PathBuf) -> Result<Vec<ConfigPair>> {
         None => {}
     };
 
-    // return the toml values
+    info!("return the toml values");
     Ok(vec_conf)
 }
 
